@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--<![endif]-->
+
+<!--<head tag-->
+<div th:replace="/include/head :: head"> </div>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+<section class="container">
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div id="error-container" class="block-error animated fadeInUp">
+                <header>
+                    <center><h2 class="error" th:text="|${httpStatus}|">404</h2></center>
+
+                    <p class="text-center" th:utext="${errorMessage}">Page not found</p>
+                </header>
+
+
+                <p class="text-center">Hi, we have a problem. We're having trouble loading the page you are looking for.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-info btn-block btn-3d" href="/">Back to Dashboard</a>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="btn btn-success btn-block btn-3d" onclick="history.back();">Previous Page</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--Global JS-->
+<div th:insert="include/footer :: footer"></div>
+</body>
+
+
+<!-- Mirrored from ignitethemes.net/logistica/pages-404.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Mar 2020 12:47:00 GMT -->
+</html>
