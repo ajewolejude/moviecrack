@@ -134,7 +134,23 @@
 
                             <div class="panel-body table-responsive">
 
+                                <table id="favTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                    <tr align="center">
+                                        <th>id</th>
+                                        <th>Title</th>
+                                        <th>Overview</th>
+                                        <th>Runtime</th>
+                                        <th>Vote Avg</th>
+                                        <th>Status</th>
+                                        <th>Link</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="result">
 
+
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -407,6 +423,86 @@
     <div th:insert="include/footer :: footer"></div>
 </body>
 
+<script type="text/javascript">
 
-<!-- Mirrored from ignitethemes.net/logistica/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 16 Mar 2020 12:45:38 GMT -->
+
+$(document).ready(function() {
+   alert("hiiiii");
+
+
+      var tok = sessionStorage.getItem("token");
+      var user_id = sessionStorage.getItem("user_id");
+      console.log(tok);
+      console.log(user_id);
+      if (tok == null){
+      location.href ="http://localhost:8080/registration/login";
+
+      }else{
+
+              alert(tok);
+                $.ajax({
+                type:'get',
+               url : "/api/users/movies",
+               dataType : 'json',
+               cache : false,
+               timeout : 600000,
+               beforeSend: function(xhr){xhr.setRequestHeader('Authorization', tok);},
+               success : function(data) {
+                alert(JSON.stringify(data));
+                $.each(data, function(i, movie){
+
+                     var html = '<tr>' ;
+                     html += '<td>' + movie.id + '</td>';
+
+                      html += '<td>' + movie.title + '</td>';
+                      html += '<td>' + movie.overview + '</td>';
+                      html += '<td>' + movie.runtime + '</td>';
+                      html += '<td>' + movie.voteAverage + '</td>';
+                      html += '<td>' + movie.status + '</td>';
+                      html += '<td><a href = \"/new/' + movie.id + '/view">View</a></td>';
+                      html += '</tr>';
+                     $('#result').prepend(html);
+
+                    $.each(movie.vidoes, function(i, video){
+                    console.log(video.site);
+                    console.log(video.name);
+                    });
+
+
+
+
+
+
+                });
+                $('#favTable').dataTable();
+               },
+               error: function(jqXHR, exception) {
+                    if (jqXHR.status === 0) {
+                        alert('Not connect.\n Verify Network.');
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found. [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (exception === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (exception === 'timeout') {
+                        alert('Time out error.');
+                    } else if (exception === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error.\n' + jqXHR.responseText);
+                    }
+                }
+              });
+
+      }
+
+
+});
+
+
+
+
+</script>
+
 </html>
