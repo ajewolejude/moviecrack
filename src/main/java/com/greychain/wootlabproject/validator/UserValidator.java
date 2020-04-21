@@ -1,6 +1,6 @@
 package com.greychain.wootlabproject.validator;
 
-import com.greychain.wootlabproject.domain.User;
+import com.greychain.wootlabproject.model.User;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
