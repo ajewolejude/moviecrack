@@ -1,13 +1,9 @@
 package com.greychain.wootlabproject.security;
 
-import com.greychain.wootlabproject.domain.User;
+import com.greychain.wootlabproject.model.User;
 import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import java.util.Date;
 import java.util.HashMap;

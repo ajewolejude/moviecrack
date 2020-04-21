@@ -1,8 +1,6 @@
-package com.greychain.wootlabproject.controller;
+package com.greychain.wootlabproject.controller.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.greychain.wootlabproject.domain.User;
+import com.greychain.wootlabproject.model.User;
 import com.greychain.wootlabproject.payload.JWTLoginSucessReponse;
 import com.greychain.wootlabproject.payload.LoginRequest;
 import com.greychain.wootlabproject.security.JwtTokenProvider;
@@ -10,7 +8,6 @@ import com.greychain.wootlabproject.services.MapValidationErrorService;
 import com.greychain.wootlabproject.services.UserService;
 import com.greychain.wootlabproject.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 

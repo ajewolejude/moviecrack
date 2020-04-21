@@ -1,6 +1,6 @@
 package com.greychain.wootlabproject.security;
 
-import com.greychain.wootlabproject.domain.User;
+import com.greychain.wootlabproject.model.User;
 import com.greychain.wootlabproject.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
