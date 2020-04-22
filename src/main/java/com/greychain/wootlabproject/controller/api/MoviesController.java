@@ -7,6 +7,9 @@ import com.greychain.wootlabproject.model.Movie;
 import com.greychain.wootlabproject.payload.SingleRequest;
 import com.greychain.wootlabproject.security.JwtTokenProvider;
 import com.greychain.wootlabproject.services.FavoritesService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -34,8 +37,13 @@ public class MoviesController {
         return new RestTemplate();
     }
 
+    @ApiOperation(value = "Get list of movies", response = ResponseEntity.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
     @GetMapping("/all")
-    public ResponseEntity<?> getAvailableOperations() throws JsonProcessingException {
+    public ResponseEntity<?> getAllMovies() throws JsonProcessingException {
         String serviceURL = "https://wootlab-moviedb.herokuapp.com/api/movie/list/all";
         String jsonString = restTemplate.getForObject(serviceURL, String.class);
         Movie[] movieList = new ObjectMapper().readValue(jsonString, Movie[].class);
@@ -44,7 +52,11 @@ public class MoviesController {
         return new ResponseEntity<Movie[]>(movieList, HttpStatus.CREATED);
     }
 
-
+    @ApiOperation(value = "Get details of a movie", response = ResponseEntity.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
     @PostMapping("/view")
     public ResponseEntity<?> getMovieDetails(@Valid @RequestBody SingleRequest singleRequest) throws JsonProcessingException {
         String serviceURL = "https://wootlab-moviedb.herokuapp.com/api/movie/list/all";
@@ -62,6 +74,11 @@ public class MoviesController {
 
     }
 
+    @ApiOperation(value = "Get list of favorite movies", response = ResponseEntity.class)
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+            @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
     @PostMapping("/favorites")
     public ResponseEntity<?> getMyFavoriteMovies(@Valid @RequestBody SingleRequest singleRequest) throws JsonProcessingException {
 
