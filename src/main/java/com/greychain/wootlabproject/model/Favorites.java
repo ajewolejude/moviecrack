@@ -51,4 +51,13 @@ public class Favorites {
 				", user_id=" + user_id +
 				'}';
 	}
+
+	public Favorites(Long id, Long movie_id, Long user_id) {
+		this.id = id;
+		this.movie_id = movie_id;
+		this.user_id = user_id;
+	}
+
+	public Favorites() {
+	}
 }

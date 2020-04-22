@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -98,7 +99,7 @@ public class FavoritesController {
 
 
     @ApiOperation(value = "Determine if a movie is a user's favorite", response = ResponseEntity.class)
-    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved list"),
+    @ApiResponses(value = { @ApiResponse(code = 200, message = "Successfully retrieved bool"),
             @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found") })
@@ -122,7 +123,6 @@ public class FavoritesController {
     @GetMapping("/{user_id}/{movie_id}/delete")
     public ResponseEntity<?> deleteFav(@PathVariable Long user_id, @PathVariable Long movie_id){
         favoritesService.removeFav(user_id,movie_id);
-
-        return new ResponseEntity<String>("Favorite was deleted", HttpStatus.OK);
+        return new ResponseEntity<Boolean>(true, HttpStatus.OK);
     }
 }

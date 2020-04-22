@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Max;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -39,6 +42,12 @@ public class UserService {
 
         return userRepository.findByUsername(username);
     }
+
+    public List<User> getAllUsers(){
+
+        return userRepository.findAll();
+    }
+
 
 
 

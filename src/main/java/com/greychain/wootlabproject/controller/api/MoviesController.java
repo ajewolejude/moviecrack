@@ -84,21 +84,21 @@ public class MoviesController {
 
         List<Favorites> favoritesList = favoritesService.getUserFav((long) singleRequest.getId());
 
-
+        Movie[] myMovieList = new Movie[favoritesList.size()];
+        if (favoritesList.isEmpty()){
+            return new ResponseEntity<Movie[]>(myMovieList, HttpStatus.CREATED);
+        }
         String serviceURL = "https://wootlab-moviedb.herokuapp.com/api/movie/list/all";
         String jsonString = restTemplate.getForObject(serviceURL, String.class);
         Movie[] movieList = new ObjectMapper().readValue(jsonString, Movie[].class);
-        Movie[] myMovieList = new Movie[favoritesList.size()];
+
         for (Movie movie : movieList) {
-            if (myMovieList[0] == null) {
                 for (int i = 0; i < favoritesList.size(); i++) {
 
                     if (movie.getId().equals(favoritesList.get(i).getMovie_id().intValue())) {
                         myMovieList[i] = movie;
                     }
                 }
-
-            }
 
         }
 
