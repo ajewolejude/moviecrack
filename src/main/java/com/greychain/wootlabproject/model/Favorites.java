@@ -1,9 +1,12 @@
 package com.greychain.wootlabproject.model;
 
+import io.swagger.annotations.ApiModel;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="favorites")
+@ApiModel(description = "All details about the Favorites. ")
 public class Favorites {
 
     @Id

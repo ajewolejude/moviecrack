@@ -7,6 +7,9 @@ import com.greychain.wootlabproject.security.JwtTokenProvider;
 import com.greychain.wootlabproject.services.MapValidationErrorService;
 import com.greychain.wootlabproject.services.UserService;
 import com.greychain.wootlabproject.validator.UserValidator;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +43,9 @@ public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @ApiOperation(value = "Login a user", response = ResponseEntity.class)
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result){
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
         if(errorMap != null) return errorMap;
 
@@ -59,6 +63,7 @@ public class UserController {
         return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt, user.getId()));
     }
 
+    @ApiOperation(value = "Register a user", response = ResponseEntity.class)
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result){
         // Validate passwords match
