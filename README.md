@@ -18,11 +18,24 @@ Videos are YouTube videos.
 favorites, add to favorites, etc).
 
 
+## Architecture:
+-Contollers (Including REST)
+-Exceptions
+-Services
+-Repositories
+-Models
+-Security
+-Configuration
+-Validator
+
+
+
+
 # Configuration 
 
 ## Prerequisites
-Java 8
-Spring Boot 2.2.6
+-Java 8
+-Spring Boot 2.2.6
 
 ## Dependencies
 Spring Security
@@ -52,28 +65,18 @@ run WootlabprojectApplication in package com.greychain.wootlabproject;
 ```
 
 
+
+
 # Assumptions
-1.
+1. User role is unneccessary 
+2. Password Encryption Mode.
 
 
-# Improvements
+
+# Feedback
 1. The movie list has a field vidoes, instead of videos
 
 
-## Implementation:
-- Unit tests using JUnit, Mockito
-- Swagger for API documentation
-- Spring Exception Handler
-- Espresso for UI Tests. https://drive.google.com/open?id=1CbjvejRaDs-ksoPrQYTQDipLI64oE7cN
 
 
 
-### Architecture:
--Contollers (Including REST)
--Exceptions
--Services
--Repositories
--Models
--Security
--Configuration
--Validator
