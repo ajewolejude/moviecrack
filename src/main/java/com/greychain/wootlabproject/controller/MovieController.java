@@ -15,7 +15,7 @@ public class MovieController {
 
     @RequestMapping("/{id}/view")
     public ModelAndView showDetails(@PathVariable(name = "id") int id, Model model){
-        return new ModelAndView("details", "id", id);
+        return new ModelAndView("movie/details", "id", id);
     }
 
 
@@ -24,5 +24,12 @@ public class MovieController {
 
         return "index";
     }
+
+    @RequestMapping("/favorite")
+    public String showMyFavorite(){
+        return "movie/favorite";
+    }
+
+
 
 }
