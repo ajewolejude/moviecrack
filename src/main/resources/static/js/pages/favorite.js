@@ -73,7 +73,7 @@ $("#emptyList").hide();
                     } else if (jqXHR.status == 404) {
                         alert('Requested page not found. [404]');
                     } else if (jqXHR.status == 500) {
-                        alert('Internal Server Error [500].');
+                        alert('Not connected.\n You need internet connection.');
                     } else if (exception === 'parsererror') {
                         alert('Requested JSON parse failed.');
                     } else if (exception === 'timeout') {

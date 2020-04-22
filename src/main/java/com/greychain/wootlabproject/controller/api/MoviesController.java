@@ -84,6 +84,7 @@ public class MoviesController {
 
         List<Favorites> favoritesList = favoritesService.getUserFav((long) singleRequest.getId());
 
+        int count = 0;
         Movie[] myMovieList = new Movie[favoritesList.size()];
         if (favoritesList.isEmpty()){
             return new ResponseEntity<Movie[]>(myMovieList, HttpStatus.CREATED);
@@ -93,12 +94,19 @@ public class MoviesController {
         Movie[] movieList = new ObjectMapper().readValue(jsonString, Movie[].class);
 
         for (Movie movie : movieList) {
+
+            if (count != favoritesList.size()){
                 for (int i = 0; i < favoritesList.size(); i++) {
 
                     if (movie.getId().equals(favoritesList.get(i).getMovie_id().intValue())) {
                         myMovieList[i] = movie;
+                        count++;
                     }
                 }
+            }else {
+                break;
+            }
+
 
         }
 
