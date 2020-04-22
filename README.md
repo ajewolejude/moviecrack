@@ -1,8 +1,5 @@
 # moviecrack
 
-This project is an android calculator app using kotlin programming language. It was implemented using a MVP + ViewModel architecture
-which includes a ViewModel object. 
-
 ## Functional Requirements
 Create a web application with the following requirements:
 1. Users should be able to register accounts before using the platform with basic
