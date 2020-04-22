@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" xmlns:th="http://www.thymeleaf.org"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<!--<![endif]-->
+
+<!--<head tag-->
+<div th:replace="/include/head :: head"> </div>
+<body>
+    <section id="main-wrapper" class="theme-red-full">
+        <!--<HEADER.HTML-->
+        <div th:replace="/include/header :: header"> </div>
+        <div th:replace="/include/header :: aside"> </div>
+
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader dark">
+                <h1>Dashboard</h1>
+                <p class="description" id ="description" ></p>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">You are here:</span>
+                    <ol class="breadcrumb">
+                        <li class="active">Dashboard</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+
+
+                <div class="row">
+                    <center>
+                        <div class="loader" id="loader"></div>
+                    </center>
+
+                </div>
+
+
+                <div id ="page" >
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title" id="title"></h3>
+                                <div class="actions pull-right">
+                                    <a id="fav" type="button" class="btn btn-success">Add to Favorites</a>
+                                    <a id="unfav"  type="button" class="btn btn-success">Remove from Favorites</a>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="poster"></div>
+
+                            <div class="panel-body table-responsive">
+                                <h3 id="overview"></h3>
+                                <h3 id="genre"></h3>
+                                <h4 id="budget"></h4>
+
+                                <div id="result"></div>
+                                <div id="result-video"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </section>
+        </section>
+        <!--main content end-->
+
+    <!--<FOOTER.HTML-->
+    <div th:insert="include/footer :: footer"></div>
+</body>
+<script src="/js/pages/details.js"></script>
+</html>

@@ -9,12 +9,9 @@
     <script src="/js/jquery.navgoco.min.js"></script>
     <script src="/js/pace.min.js"></script>
     <script src="/js/jquery.fullscreen-min.js"></script>
-    <script src="/js/src/app.js"></script>
     <!--Page Level JS-->
     <script src="/js/jquery.countTo.js"></script>
     <script src="/js/skycons.js"></script>
-    <script src="/js/moment.min.js"></script>
-    <script src="/js/daterangepicker.js"></script>
     <!-- ChartJS  -->
     <script src="/js/chartjs/Chart.min.js"></script>
     <!-- Morris  -->
@@ -22,96 +19,19 @@
     <script src="/js/raphael.2.1.0.min.js"></script>
     <!-- Vector Map  -->
     <script src="/js/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="/js/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- Gauge  -->
-    <script src="/js/gauge.min.js"></script>
-    <script src="/js/gauge-demo.js"></script>
-    <!-- Calendar  -->
-    <script src="/js/clndr.js"></script>
-    <script src="/js/clndr-demo.js"></script>
+    <script src="/js/app.js"></script>
+
     <script src="/js/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
     <!-- Switch -->
     <script src="/js/switchery.min.js"></script>
     <!--Load these page level functions-->
-    <script>
-    $(document).ready(function() {
-        app.dateRangePicker();
-        app.chartJs();
-        app.weather();
-        app.spinStart();
-        app.spinStop();
-    });
-    </script>
+
 
     <!--Page Leve JS -->
     <script src="/js/jquery.dataTables.js"></script>
     <script src="/js/dataTables.bootstrap.js"></script>
     <script>
-    $(document).ready(function() {
-    // get current URL path and assign 'active' class
-	var pathname = window.location.pathname;
-	$('.nav > li > a[href="'+pathname+'"]').parent().addClass('active');
-	$('ul li a').click(function(){ $('li a').removeClass("active"); $(this).addClass("active"); });
-        $('#driverTable').dataTable();
-        $('#truckTable').dataTable();
-        $('#mateTable').dataTable();
-        $('#tyreTable').dataTable();
-        $('#accessoryTable').dataTable();
-        $('#userTable').dataTable();
-        $('#truckOwnerTable').dataTable();
 
-    });
-
-    $('#selectRole').change(function(){
-            if ($('#selectRole').val() =="Corporate"){
-            var real_url = "/user/corporate/all";
-
-                    $.ajax({
-                        type: 'GET',
-                        url: real_url,
-                        success: function(data){
-                            var slctOwner=$('#selectOwner'), option="";
-                            slctOwner.empty();
-
-                            for(var i=0; i<data.length; i++){
-                                option = option + "<option value='"+data[i].id + "'>"+data[i].company_name + "</option>";
-                            }
-                            slctOwner.append(option);
-                        },
-                        error:function(){
-                            alert("error");
-                        }
-
-                    });
-
-            } else if ($('#selectRole').val() =="Private"){
-
-
-            var real_url = "/user/private/all";
-
-                         $.ajax({
-                            type: 'GET',
-                            url: real_url,
-                            success: function(data){
-                                var slctOwner=$('#selectOwner'), option="";
-                                slctOwner.empty();
-
-                                for(var i=0; i<data.length; i++){
-                                    option = option + "<option value='"+data[i].id + "'>"+data[i].first_name + "</option>";
-                                }
-                                slctOwner.append(option);
-                            },
-                            error:function(){
-                                alert("error");
-                            }
-
-                        });
-            }
-
-
-        });
-      $('#popover-left,#popover-top,#popover-bottom,#popover-right').popover()
-        $('#tooltip-left,#tooltip-top,#tooltip-bottom,#tooltip-right').tooltip()
     </script>
 
 </footer>
