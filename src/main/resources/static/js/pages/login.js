@@ -1,16 +1,18 @@
 $(document).ready(function() {
-   //alert("hiiiii");
+
    $('#loginForm').submit(function (event) {
-       // alert("hi");
+   //disable button
+   $("#login-submit").attr("disabled", true);
+
 event.preventDefault();
         var loginRequest = {}
         loginRequest["username"] = $("#username").val();
         loginRequest["password"] = $("#password").val();
 
         var sjson = JSON.stringify(loginRequest);
-        alert(sjson);
 
 
+        //login request
         $.ajax({
         type:'post',
        contentType : 'application/json',
@@ -20,19 +22,20 @@ event.preventDefault();
        cache : false,
        timeout : 600000,
        success : function(data) {
-       alert(JSON.stringify(data));
+       $("#login-submit").attr("disabled", false);
        sessionStorage.setItem("token", data.token);
        sessionStorage.setItem("user_id", data.id);
        location.href = "http://localhost:8080/movie/all";
 
        },
        error: function(jqXHR, exception) {
+       $("#login-submit").attr("disabled", false);
             if (jqXHR.status === 0) {
                 alert('Not connect.\n Verify Network.');
             } else if (jqXHR.status == 404) {
                 alert('Requested page not found. [404]');
             } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
+            $("#response").prepend('<div class="alert alert-danger">Incorrect Login details, try again</div>');
             } else if (exception === 'parsererror') {
                 alert('Requested JSON parse failed.');
             } else if (exception === 'timeout') {
@@ -42,8 +45,6 @@ event.preventDefault();
             } else {
                 alert('Uncaught Error.\n' + jqXHR.responseText);
                 alert('check login, try again');
-
-
             }
         }
       });

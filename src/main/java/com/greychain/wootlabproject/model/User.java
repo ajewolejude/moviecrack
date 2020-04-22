@@ -83,6 +83,18 @@ public class User implements UserDetails {
     UserDetails interface methods
      */
 
+
+    public User(Long id, @NotBlank(message = "username is required") String username, @NotBlank(message = "Please enter your first name") String firstname, @NotBlank(message = "Please enter your last name") String lastname, @NotBlank(message = "Password field is required") String password, String confirmPassword) {
+        this.id = id;
+        this.username = username;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+
+
+
     @Override
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {

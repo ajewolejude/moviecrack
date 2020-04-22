@@ -1,7 +1,8 @@
 $(document).ready(function() {
-   alert("hiiiii");
+
 $('#regForm').submit(function (event) {
-        alert("hi");
+$("#reg-submit").attr("disabled", true);
+$("#response").children().remove();
 event.preventDefault();
         var user = {}
         user["username"] = $("#username").val();
@@ -11,7 +12,9 @@ event.preventDefault();
         user["confirmPassword"] = $("#confirmPassword").val();
 
         var sjson = JSON.stringify(user);
-        alert(sjson);
+
+
+        //register request
 
         $.ajax({
         type:'post',
@@ -22,15 +25,19 @@ event.preventDefault();
        cache : false,
        timeout : 600000,
        success : function(data) {
-        alert(data);
+        $("#reg-submit").attr("disabled", false);
+        $("#response").prepend('<div class="alert alert-info">You have successfully registered to our awesome app!</div>');
+        $("#regForm").reset();
+
        },
        error: function(jqXHR, exception) {
+       $("#reg-submit").attr("disabled", false);
             if (jqXHR.status === 0) {
                 alert('Not connect.\n Verify Network.');
             } else if (jqXHR.status == 404) {
                 alert('Requested page not found. [404]');
             } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
+                $("#response").prepend('<div class="alert alert-danger">Username Already Taken!</div>');
             } else if (exception === 'parsererror') {
                 alert('Requested JSON parse failed.');
             } else if (exception === 'timeout') {
@@ -38,7 +45,16 @@ event.preventDefault();
             } else if (exception === 'abort') {
                 alert('Ajax request aborted.');
             } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
+            var pattern = /Passwords must match/;
+
+
+             if(pattern.test(jqXHR.responseText)){
+                $("#response").prepend('<div class="alert alert-danger">Passwords must match</div>');
+                }else{
+
+              $("#response").prepend('<div class="alert alert-danger">' + jqXHR.responseText +'</div>');
+               }
+
             }
 
         }

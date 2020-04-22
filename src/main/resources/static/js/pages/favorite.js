@@ -1,9 +1,12 @@
 
 
 $(document).ready(function() {
+ //get user id and bearer token from session
  var user_id = sessionStorage.getItem("user_id");
  var tok = sessionStorage.getItem("token");
  $("#movieList").hide();
+$("#emptyList").hide();
+
 
 
     var singleRequest = {}
@@ -12,6 +15,7 @@ $(document).ready(function() {
 
         var sjson = JSON.stringify(singleRequest);
 
+//request to get all favorites of users
         $.ajax({
 
         type:'post',
@@ -27,34 +31,40 @@ $(document).ready(function() {
 
                },
                success : function(data) {
+                if(data == 0){
+                //list is empty, no favorite movie
                 $("#loader").hide();
-                $("#movieList").show();
-                $.each(data, function(i, movie){
+                  $("#emptyList").show();
 
-                     var html = '<tr>' ;
-                     html += '<td>' + movie.id + '</td>';
+                }else{
+                //show list of movies
+                                $("#loader").hide();
+                                $("#movieList").show();
+                                $("#emptyList").hide();
+                                $.each(data, function(i, movie){
 
-                      html += '<td>' + movie.title + '</td>';
-                      html += '<td>' + movie.overview + '</td>';
-                      html += '<td>' + movie.runtime + '</td>';
-                      html += '<td>' + movie.voteAverage + '</td>';
-                      html += '<td>' + movie.status + '</td>';
-                      html += '<td><a class=\"btn btn-primary btn-square\"  href = \"/movie/' + movie.id + '/view">View</a></td>';
-                      html += '</tr>';
-                     $('#result').prepend(html);
+                                     var html = '<tr>' ;
+                                     html += '<td>' + movie.id + '</td>';
 
-                    $.each(movie.vidoes, function(i, video){
-                    console.log(video.site);
-                    console.log(video.name);
-                    });
+                                      html += '<td>' + movie.title + '</td>';
+                                      html += '<td>' + movie.overview + '</td>';
+                                      html += '<td>' + movie.runtime + '</td>';
+                                      html += '<td>' + movie.voteAverage + '</td>';
+                                      html += '<td>' + movie.status + '</td>';
+                                      html += '<td><a class=\"btn btn-primary btn-square\"  href = \"/movie/' + movie.id + '/view">View</a></td>';
+                                      html += '</tr>';
+                                     $('#result').prepend(html);
+
+                                    $.each(movie.vidoes, function(i, video){
+                                    console.log(video.site);
+                                    console.log(video.name);
+                                    });
+
+                                });
+                                $('#favTable').dataTable();
+                }
 
 
-
-
-
-
-                });
-                $('#favTable').dataTable();
                },
                error: function(jqXHR, exception) {
                sessionStorage.clear();
