@@ -26,8 +26,9 @@ event.preventDefault();
        timeout : 600000,
        success : function(data) {
         $("#reg-submit").attr("disabled", false);
+        alert("You have successfully registered to our awesome app!")
         $("#response").prepend('<div class="alert alert-info">You have successfully registered to our awesome app!</div>');
-        $("#regForm").reset();
+       location.href ="http://localhost:8080/login";
 
        },
        error: function(jqXHR, exception) {

@@ -241,7 +241,6 @@ $(document).ready(function() {
  var user_id = sessionStorage.getItem("user_id");
  var tok = sessionStorage.getItem("token");
       console.log(user_id);
-    alert('token.'+tok);
 
     $.ajax({
         type:'get',
